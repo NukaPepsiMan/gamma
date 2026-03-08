@@ -1,6 +1,6 @@
 package aruba.cloud.gamma.config;
 
-import org.springframework.boot.security.autoconfigure.actuate.web.servlet.EndpointRequest;
+import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
@@ -15,7 +15,7 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityFilterChainConfig {
 
     @Bean
-    public SecurityFilterChain securityFilterChainConfig(HttpSecurity http) {
+    public SecurityFilterChain securityFilterChainConfig(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable);
 
         http.authorizeHttpRequests(authorizeRequests
