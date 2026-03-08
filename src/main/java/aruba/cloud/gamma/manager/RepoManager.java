@@ -46,4 +46,8 @@ public class RepoManager {
         return documentWorkflowRepository.save(workflow);
     }
 
+    public void deleteAllWorkflows() {
+        documentWorkflowRepository.deleteAll();
+    }
+
 }
