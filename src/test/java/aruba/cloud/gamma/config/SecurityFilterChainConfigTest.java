@@ -1,6 +1,7 @@
 package aruba.cloud.gamma.config;
 
 
+import aruba.cloud.gamma.config.oauth2.SecurityFilterChainConfig;
 import aruba.cloud.gamma.controller.PecFilterController;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

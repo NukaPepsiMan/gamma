@@ -1,4 +1,4 @@
-package aruba.cloud.gamma.config;
+package aruba.cloud.gamma.config.oauth2;
 
 import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.context.annotation.Bean;
