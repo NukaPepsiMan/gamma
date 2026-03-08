@@ -25,7 +25,18 @@ public class PecFilterService {
     }
 
 
+    public PecFilterDTO createFilter(PecFilterDTO dto) {
+        PecFilter filter = filterFactory.createEntity(dto);
+        PecFilter savedFilter = repoManager.saveFilter(filter);
+        return filterFactory.createDTO(savedFilter);
+    }
 
+    public boolean deleteFilter(Long id){
+        if (repoManager.existsFilterById(id)) {
+            repoManager.deleteFilterById(id);
+            return true;
+        } else return false;
+    }
 
 
 }
