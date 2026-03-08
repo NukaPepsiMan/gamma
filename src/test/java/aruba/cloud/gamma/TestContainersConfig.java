@@ -1,4 +1,4 @@
-package aruba.cloud.gamma.config;
+package aruba.cloud.gamma;
 
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection;

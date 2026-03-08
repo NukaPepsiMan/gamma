@@ -1,6 +1,6 @@
 package aruba.cloud.gamma.manager;
 
-import aruba.cloud.gamma.config.TestContainersConfig;
+import aruba.cloud.gamma.TestContainersConfig;
 import aruba.cloud.gamma.entity.PecFilter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
