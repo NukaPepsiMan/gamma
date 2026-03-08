@@ -6,6 +6,6 @@ import lombok.Builder;
 public record DocumentSignedEventDTO(
         String messageId,
         String tenantId,
-        String signedDocument
+        String signedDocumentId
 ) {
 }

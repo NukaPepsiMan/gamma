@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class PecFilterFactory {
 
-    public PecFilterDTO createDTO(@NonNull PecFilter filter) {
+    public PecFilterDTO createDTOFromEntity(@NonNull PecFilter filter) {
         return PecFilterDTO.builder()
                 .id(filter.getId())
                 .tenantId(filter.getTenantId())
@@ -19,7 +19,7 @@ public class PecFilterFactory {
                 .build();
     }
 
-    public PecFilter createEntity(@NonNull PecFilterDTO dto) {
+    public PecFilter createEntityFromDTO(@NonNull PecFilterDTO dto) {
         return PecFilter.builder()
                 .tenantId(dto.tenantId())
                 .mailbox(dto.mailbox())

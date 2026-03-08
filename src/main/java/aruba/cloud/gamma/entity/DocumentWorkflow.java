@@ -28,7 +28,7 @@ public class DocumentWorkflow {
     @Enumerated(EnumType.STRING)
     private WorkflowStatus status;
 
-    private String signedDocument;
+    private String signedDocumentId;
 
     private String conservationId;
 

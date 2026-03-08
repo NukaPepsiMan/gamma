@@ -20,15 +20,15 @@ public class PecFilterService {
     public List<PecFilterDTO> getFiltersByTenant(String tenant) {
         List<PecFilter> filters = repoManager.findFiltersByTenantId(tenant);
         return filters.stream()
-                .map(filterFactory::createDTO)
+                .map(filterFactory::createDTOFromEntity)
                 .collect(Collectors.toList());
     }
 
 
     public PecFilterDTO createFilter(PecFilterDTO dto) {
-        PecFilter filter = filterFactory.createEntity(dto);
+        PecFilter filter = filterFactory.createEntityFromDTO(dto);
         PecFilter savedFilter = repoManager.saveFilter(filter);
-        return filterFactory.createDTO(savedFilter);
+        return filterFactory.createDTOFromEntity(savedFilter);
     }
 
     public boolean deleteFilter(Long id){
