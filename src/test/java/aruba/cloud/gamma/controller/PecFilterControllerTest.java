@@ -18,7 +18,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import java.util.List;
 
 @WebMvcTest(PecFilterController.class)
-@AutoConfigureMockMvc(addFilters = false) //disabilitiamo la sicurezza di spring seecurity per i test unitari
+@AutoConfigureMockMvc(addFilters = false) //disabilitiamo la sicurezza di spring security per i test unitari
 public class PecFilterControllerTest {
 
     @Autowired
