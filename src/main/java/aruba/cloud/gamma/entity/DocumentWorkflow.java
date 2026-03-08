@@ -1,5 +1,6 @@
 package aruba.cloud.gamma.entity;
 
+import aruba.cloud.gamma.common.enums.WorkflowStatus;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -24,7 +25,8 @@ public class DocumentWorkflow {
 
     private String attachmentName;
 
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private WorkflowStatus status;
 
     private String signedDocument;
 

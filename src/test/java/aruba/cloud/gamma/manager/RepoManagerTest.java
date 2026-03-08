@@ -1,6 +1,8 @@
 package aruba.cloud.gamma.manager;
 
 import aruba.cloud.gamma.TestContainersConfig;
+import aruba.cloud.gamma.common.enums.WorkflowStatus;
+import aruba.cloud.gamma.entity.DocumentWorkflow;
 import aruba.cloud.gamma.entity.PecFilter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -9,7 +11,9 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
@@ -32,7 +36,7 @@ public class RepoManagerTest {
         //Controllo il filtro sia salvato correttamente
         PecFilter savedFilter = repoManager.saveFilter(filter);
         Assertions.assertNotNull(savedFilter);
-        Assertions.assertNotNull(savedFilter.getId());
+        Assertions.assertNotNull(savedFilter.getId(), "L'ID non deve essere null");
 
         Long filterId = savedFilter.getId();
 
@@ -49,4 +53,37 @@ public class RepoManagerTest {
         Assertions.assertFalse(repoManager.existsFilterById(filterId));
         Assertions.assertTrue(repoManager.findFiltersByTenantId("tenant-1").isEmpty());
     }
+
+    @Test
+    public void testDocumentWorkfolwOperations(){
+        String messageId = UUID.randomUUID().toString();
+
+        DocumentWorkflow workflow = DocumentWorkflow.builder()
+                .messageId(messageId)
+                .tenantId("tenant-1")
+                .attachmentName("contratto.pdf")
+                .status(WorkflowStatus.RECIEVED)
+                .createdAt(LocalDateTime.now())
+                .updatedAt(LocalDateTime.now())
+                .build();
+
+        DocumentWorkflow savedWorkflow = repoManager.saveWorkflow(workflow);
+        Assertions.assertNotNull(savedWorkflow);
+        Assertions.assertNotNull(savedWorkflow.getId(), "L'ID non deve essere null");
+
+        DocumentWorkflow retrivedWorkflow = repoManager.findWorkflowByMessageId(messageId).orElse(null);
+        Assertions.assertNotNull(retrivedWorkflow);
+        Assertions.assertEquals("tenant-1", retrivedWorkflow.getTenantId());
+        Assertions.assertEquals(WorkflowStatus.RECIEVED, retrivedWorkflow.getStatus());
+
+        retrivedWorkflow.setStatus(WorkflowStatus.CONSERVED);
+        retrivedWorkflow.setConservationId("CONS_123");
+        repoManager.saveWorkflow(retrivedWorkflow);
+
+        DocumentWorkflow updatedWorkflow = repoManager.findWorkflowByMessageId(messageId).orElse(null);
+        Assertions.assertNotNull(updatedWorkflow);
+        Assertions.assertEquals(WorkflowStatus.CONSERVED, updatedWorkflow.getStatus());
+        Assertions.assertEquals("CONS_123", updatedWorkflow.getConservationId());
+    }
+
 }

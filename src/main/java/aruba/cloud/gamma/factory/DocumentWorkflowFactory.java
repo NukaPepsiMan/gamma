@@ -1,5 +1,6 @@
 package aruba.cloud.gamma.factory;
 
+import aruba.cloud.gamma.common.enums.WorkflowStatus;
 import aruba.cloud.gamma.dto.events.AttachmentToSignEventDTO;
 import aruba.cloud.gamma.entity.DocumentWorkflow;
 import org.springframework.stereotype.Component;
@@ -14,7 +15,7 @@ public class DocumentWorkflowFactory {
                 .messageId(event.messageId())
                 .tenantId(event.tenantId())
                 .attachmentName(event.attachmentName())
-                .status("RECEIVED")
+                .status(WorkflowStatus.RECIEVED)
                 .createdAt(LocalDateTime.now())
                 .updatedAt(LocalDateTime.now())
                 .build();
