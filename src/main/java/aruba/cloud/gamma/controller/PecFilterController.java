@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,7 +38,7 @@ public class PecFilterController {
             @ApiResponse(responseCode = "400", description = "Richiesta malformata (es. campi obbligatorori mancanti)")
     })
     @PostMapping("create")
-    public ResponseEntity<PecFilterDTO> createFilter(@RequestBody PecFilterDTO dto){
+    public ResponseEntity<PecFilterDTO> createFilter(@Valid @RequestBody PecFilterDTO dto){
         PecFilterDTO createdDto = pecFilterService.createFilter(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdDto);
     }

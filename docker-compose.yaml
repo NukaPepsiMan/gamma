@@ -34,8 +34,6 @@ services:
     ports:
       - "8089:8080"
     command: ["--global-response-templating", "--disable-gzip"]
-    volumes:
-      - ./wiremock-mappings:/home/wiremock/mappings
 
   keycloak:
     image: quay.io/keycloak/keycloak:26.0

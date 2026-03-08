@@ -19,7 +19,7 @@ public class SecurityFilterChainConfig {
         http.csrf(AbstractHttpConfigurer::disable);
 
         http.authorizeHttpRequests(authorizeRequests
-                -> authorizeRequests.requestMatchers(EndpointRequest.toAnyEndpoint())
+                -> authorizeRequests.requestMatchers("/actuator/**","/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**")
                     .permitAll()
                     .anyRequest()
                     .authenticated());
